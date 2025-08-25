@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Luz mi esposa, Con Amor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        .message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .heart {
+            font-size: 5rem;
+            color: #ff2e63;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(255, 46, 99, 0.7);
+            animation: heartbeat 1.2s infinite;
+            cursor: pointer;
+        }
+        
+        .photos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .photo-frame {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-frame:hover {
+            transform: scale(1.1);
+        }
+        
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+        
+        .memories {
+            margin-top: 40px;
+        }
+        
+        .memory {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+        
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .heart { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fireworks" id="fireworks"></div>
+    
+    <div class="container">
+        <h1>Luz, Esposa mia Te Amo</h1>
+        
+        <div class="message">
+            <p>En cada amanecer, en cada atardecer, en cada momento de mi vida, pienso en ti.</p>
+            <p>Eres la luz que ilumina mi camino y el amor que da sentido a mi existencia.</p>
+        </div>
+        
+        <div class="heart" id="heart">❤️</div>
+        
+        <div class="photos">
+            <div class="photo-frame">
+                <img src="foto1.jpg" alt="Luz y yo">
+            </div>
+            <div class="photo-frame">
+                <img src="foto2.jpg" alt="Nuestro aniversario">
+            </div>
+        </div>
+        
+        <div class="memories">
+            <h2>Nuestros Recuerdos</h2>
+            <div class="memory">
+                <p>El día que nos conocimos supe que serias el gran amor de mi vida, toda tierna y hermosa</p>
+            </div>
+            <div class="memory">
+                <p>Nuestra primera citas cuando ibamos a ensayar nuestras danzas, siempre queria que llegara la tarde para poder verte</p>
+            </div>
+            <div class="memory">
+                <p>Gracias por regalarme 2 hermosos hijos que amo con el alma, te AMO MUCHISISISISISISIMO ESPOSA MIAAAAA</p>
+            </div>
+        </div>
+        
+        <button id="musicBtn">Reproducir Música</button>
+        <button id="confettiBtn">Celebrar Amor</button>
+    </div>
+
+    <script>
+        // Efecto de corazones
+        const heart = document.getElementById('heart');
+        heart.addEventListener('click', function() {
+            createHearts();
+        });
+        
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = Math.random() * 30 + 10 + 'px';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.top = '-50px';
+                heart.style.opacity = '0';
+                heart.style.animation = `fallHearts ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+        }
+        
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fallHearts {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(${window.innerHeight}px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Efecto de confeti
+        const confettiBtn = document.getElementById('confettiBtn');
+        confettiBtn.addEventListener('click', function() {
+            createConfetti();
+        });
+        
+        function createConfetti() {
+            const fireworksContainer = document.getElementById('fireworks');
+            fireworksContainer.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-20px';
+                confetti.style.opacity = '0';
+                confetti.style.animation = `fallConfetti ${Math.random() * 3 + 2}s linear forwards`;
+                fireworksContainer.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+            
+            const confettiStyle = document.createElement('style');
+            confettiStyle.innerHTML = `
+                @keyframes fallConfetti {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translateY(${window.innerHeight}px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(confettiStyle);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff2e63', '#42b883', '#ffde59', '#4361ee', '#f72585', '#4cc9f0'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // CONTROL DE MÚSICA - ESTA ES LA PARTE QUE DEBES MODIFICAR
+        const musicBtn = document.getElementById('musicBtn');
+        let audio = null;
+        
+        musicBtn.addEventListener('click', function() {
+            if (audio && !audio.paused) {
+                audio.pause();
+                musicBtn.textContent = 'Reproducir Música';
+            } else {
+                if (!audio) {
+                    audio = new Audio();
+                    // ⬇️⬇️⬇️ CAMBIA ESTA URL POR TU MÚSICA ⬇️⬇️⬇️
+                    audio.src = 'musica.mp3';
+                    audio.loop = true;
+                }
+                audio.play();
+                musicBtn.textContent = 'Pausar Música';
+            }
+        });
+        
+        window.addEventListener('load', function() {
+            createHearts();
+        });
+    </script>
+</body>
+</html>
